@@ -1,7 +1,7 @@
 const multer = require("multer");
 const fs = require('fs')
 const path = require('path')
-const {generateRandomString}= require('../utilities/helper')
+const {generateRandomString}= require('../utilities/helpers')
 
 const setPath = (uploadDir) =>{
     return( req, res, next)=>{

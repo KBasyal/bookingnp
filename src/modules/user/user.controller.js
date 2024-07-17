@@ -41,5 +41,5 @@ class userController {
         }
     }
 }
-const userCtrl = new UserController()
+const userCtrl = new userController()
 module.exports = userCtrl;

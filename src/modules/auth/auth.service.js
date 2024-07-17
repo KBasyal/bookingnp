@@ -1,17 +1,53 @@
-const Joi = require('joi')
-const registerDTO = Joi.object({
-    name: Joi.string().min(2).max(50).required(),
-    email: Joi.string().email().required(),
-    password : Joi.string().pattern(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/).required(),
-    confirmPassword: Joi.string().valid(Joi.ref('password')).required(),
-    role : Joi.string().pattern(/^(staff|customer|admin)$/)
+const { generateRandomString } = require("../../utilities/helpers");
+const bcrypt = require('bcryptjs');
+const UserModel = require("../user/user.model");
+class AuthService {
 
-})
-const loginDTO = Joi.object({
-    email: Joi.string().email().required(),
-    password: Joi.string().required()
-})
+    transformRegisterData =(req) => {
+        try {
+            let payload = req.body;
+            // name , email., password, role, image
+            payload.password = bcrypt.hashSync(payload.password, 10);
+            // comparison 
+            // bcrupt.compareSync(stirng. hash)
+            payload.status = 'inactive'
+            payload.activationToken = generateRandomString(100)
+            // for single file
+            if (req.file) {
+                payload.image = req.file.filename;
+            }
+            return payload;
+        } catch (exception) {
+            throw exception
+        }
+    }
+    createUser = async (data) => {
+        try {
+            const user = new UserModel(data);
+            return await user.save() // insert or update the data
+        } catch (exception) {
+            throw exception;
+        }
+    }
+    findOneUser = async (filter) => {
+        try {
+            const userObj = await UserModel.findOne(filter);
+            return userObj
+        } catch (exception) {
+            throw exception
 
-module.exports={
-    registerDTO, loginDTO
+        }
+    }
+    updateUser = async (data, userId) => {
+        try {
+            const result = await UserModel.findByIdAndUpdate(userId, { $set: data });
+            return result;
+
+        } catch (exception) {
+            throw exception;
+        }
+    }
+
 }
+const authSvc = new AuthService()
+module.exports = authSvc;
