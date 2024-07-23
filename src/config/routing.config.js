@@ -10,6 +10,8 @@ const hotelRouter = require("../modules/hotel/hotel.router")
 const facilityRouter = require("../modules/facility/facility.router")
 const pricemodifierRouter = require("../modules/price-modifier/price-modifier.router")
 const roomRouter = require("../modules/room/room.router")
+const hotelfacilityRouter = require("../modules/hotel-facility/hotel-facility.router")
+const roomfacilityRouter = require ("../modules/room-facility/room-facility.router.js")
 
 
 
@@ -22,6 +24,8 @@ mainRoute.use('/hotel',hotelRouter )
 mainRoute.use('/facility', facilityRouter)
 mainRoute.use('/price-modifier',pricemodifierRouter)
 mainRoute.use('/room', roomRouter)
+mainRoute.use('/hotel-facility', hotelfacilityRouter)
+mainRoute.use('/room-facility', roomfacilityRouter)
 
 
 

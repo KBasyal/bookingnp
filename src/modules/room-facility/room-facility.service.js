@@ -1,6 +1,6 @@
-const HotelFacilityModel = require("./hotel-facility.model");
+const RoomFacilityModel = require("./room-facility.model");
 
-class HotelFacilityService {
+class RoomFacilityService {
     transformCreateData = (req) => {
         const data = {
             ...req.body
@@ -30,18 +30,18 @@ class HotelFacilityService {
     }
     store = async (data) => {
         try {
-            const hotelfacility = new HotelFacilityModel(data);
-            console.log("hotelfacility info", hotelfacility);
-            return await hotelfacility.save();
+            const roomfacility = new RoomFacilityModel(data);
+            console.log("roomfacility info", roomfacility);
+            return await roomfacility.save();
         } catch (exception) {
-            console.error('Error saving hotelfacility:', exception);
+            console.error('Error saving roomfacility:', exception);
             throw exception;
         }
     }
     
     count = async ({filter}) => {
         try {
-            const countData = await HotelFacilityModel.countDocuments(filter);
+            const countData = await RoomFacilityModel.countDocuments(filter);
             return countData;
 
         } catch (exception) {
@@ -50,7 +50,7 @@ class HotelFacilityService {
     }
     listAll = async ({ limit, skip, filter = {} }) => {
         try {
-            const response = await HotelFacilityModel.find(filter)
+            const response = await RoomFacilityModel.find(filter)
                 .sort({ _id: "desc" })
                 .skip(skip)
                 .limit(limit)
@@ -61,7 +61,7 @@ class HotelFacilityService {
     }
     findOne = async(filter)=>{
         try{
-            const data = await HotelFacilityModel.findOne(filter);
+            const data = await RoomFacilityModel.findOne(filter);
             if(!data){
                 throw{code: 400, message: "Data not found"}
             }
@@ -73,7 +73,7 @@ class HotelFacilityService {
     }
     update = async(filter, data) =>{
         try{
-            const updateResponse = await HotelFacilityModel.findOneAndUpdate(filter, {$set: data})
+            const updateResponse = await RoomFacilityModel.findOneAndUpdate(filter, {$set: data})
             return updateResponse
 
         }catch(exception){
@@ -82,9 +82,9 @@ class HotelFacilityService {
     }
     deleteOne = async(filter) =>{
         try{
-            const response = await HotelFacilityModel.findOneAndDelete(filter)
+            const response = await RoomFacilityModel.findOneAndDelete(filter)
             if(!response){
-                throw { code: 404, message:" HotelFacility does not exists"}
+                throw { code: 404, message:" RoomFacility does not exists"}
             }
             return response
 
@@ -95,7 +95,7 @@ class HotelFacilityService {
 
     getForHome =async ()=>{
         try{
-            const data = await HotelFacilityModel.find({
+            const data = await RoomFacilityModel.find({
                 status : "active"
             })
             .sort({_id:"desc"})
@@ -107,5 +107,5 @@ class HotelFacilityService {
         }
     }
 }
-const hotelfacilitySvc = new HotelFacilityService()
-module.exports = hotelfacilitySvc;
+const roomfacilitySvc = new RoomFacilityService()
+module.exports = roomfacilitySvc;

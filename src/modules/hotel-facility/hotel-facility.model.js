@@ -20,7 +20,7 @@ const HotelFacilitySchema = new mongoose.Schema({
     priceImpact: {
         type: Number, // Positive or negative impact on price
         default: 0,
-        required
+        required:true
     },
     createdBy: {
         type: mongoose.Types.ObjectId,

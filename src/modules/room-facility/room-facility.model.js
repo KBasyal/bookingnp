@@ -5,11 +5,13 @@ const RoomFacliltySchema = mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref:'Facility',
         required: true,
-        min: 2
+        default:null
     },
     room_id: {
         type: mongoose.Schema.ObjectId,
-        ref: "Room"
+        ref: "Room",
+        required: true,
+        default:null
     },
     isinclluded: {
         type: Boolean,
@@ -19,7 +21,7 @@ const RoomFacliltySchema = mongoose.Schema({
     priceImpact: {
         type: Number, // Positive or negative impact on price
         default: 0,
-        required
+        required:true
     },
     createdBy: {
         type: mongoose.Types.ObjectId,

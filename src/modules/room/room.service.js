@@ -39,7 +39,6 @@ class RoomService {
         }
     }
     
-
     count = async ({filter}) => {
         try {
             const countData = await RoomModel.countDocuments(filter);

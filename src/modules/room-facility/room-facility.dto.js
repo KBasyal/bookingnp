@@ -1,19 +1,21 @@
 const Joi = require('joi');
 
-const HotelFacilityCreateDTO = Joi.object({
+const RoomFacilityCreateDTO = Joi.object({
     isincluded: Joi.boolean().required(),
     priceImpact: Joi.number().optional(),
-    hotel_id: Joi.string().required(),
+    room_id: Joi.string().required(),
     facility_id:Joi.string().required()
+
+
 });
 
-const HotelFacilityUpdateDTO = Joi.object({
+const RoomFacilityUpdateDTO = Joi.object({
     isincluded: Joi.boolean().required(),
     priceImpact: Joi.number().optional()
 });
 
 module.exports = {
-    HotelFacilityCreateDTO,
-    HotelFacilityUpdateDTO
+    RoomFacilityCreateDTO,
+    RoomFacilityUpdateDTO
 
 };

@@ -1,14 +1,14 @@
-const hotelSvc = require("./hotel-facility.service");
+const roomSvc = require("./room-facility.service");
 
-class HotelFacilityController{
+class RoomFacilityController{
     create = async (req, res, next)=>{
         try{
-            const payload = hotelSvc.transformCreateData(req);
-            const createdHotelFacility = await hotelSvc.store(payload);
-            console.log("created hotel facility :",createdHotelFacility)
+            const payload = roomSvc.transformCreateData(req);
+            const createdRoomFacility = await roomSvc.store(payload);
+            console.log("created room facility :",createdRoomFacility)
             res.json({
-                result:createdHotelFacility,
-                message: "hotelfacility created successfully",
+                result:createdRoomFacility,
+                message: "roomfacility created successfully",
                 meta: null
             })
 
@@ -32,17 +32,17 @@ class HotelFacilityController{
                     title: new RegExp(req.query.search, 'i')
                 }
             }
-            const data = await hotelSvc.listAll({
+            const data = await roomSvc.listAll({
                 limit :limit,
                 skip:skip,
                 filter: filter
             });
-            const countData = await hotelSvc.count({
+            const countData = await roomSvc.count({
                 filter : filter
             })
             res.json({
                 result: data,
-                message:"HotelFacility List",
+                message:"RoomFacility List",
                 meta:{
                     limit: limit,
                     page: page,
@@ -56,12 +56,12 @@ class HotelFacilityController{
     }
     show= async(req, res , next) =>{
         try{
-            const detail = await hotelSvc.findOne({
+            const detail = await roomSvc.findOne({
                 _id: req.params.id
             })
             res.json({
                 result:detail,
-                message: "HotelFacility Detail fetched",
+                message: "RoomFacility Detail fetched",
                 meta: null
             })
 
@@ -71,11 +71,11 @@ class HotelFacilityController{
     }
     update =async(req, res, next)=>{
         try{
-            const existingData = await hotelSvc.findOne({
+            const existingData = await roomSvc.findOne({
                 _id: req.params.id
             })
-            const payload =hotelSvc.transformUpdateData(req, existingData)
-            const updateStatus = await hotelSvc.update({_id: req.params.id}, payload)
+            const payload =roomSvc.transformUpdateData(req, existingData)
+            const updateStatus = await roomSvc.update({_id: req.params.id}, payload)
             res.json({
                 result: updateStatus,
                 messsage:"Data updated",
@@ -90,11 +90,11 @@ class HotelFacilityController{
     }
     delete= async(req, res, next)=>{
         try{
-            const exists = await  hotelSvc.findOne({_id : req.params.id})
-            const status = await hotelSvc.deleteOne({_id : req.params.id});
+            const exists = await  roomSvc.findOne({_id : req.params.id})
+            const status = await roomSvc.deleteOne({_id : req.params.id});
             res.json({
                 result : status,
-                message : " HotelFacility deleted successfuly",
+                message : " RoomFacility deleted successfuly",
                 meta : null
             })
 
@@ -104,10 +104,10 @@ class HotelFacilityController{
     }
     listForHome = async(req, res, next) =>{
         try{
-            const list = await hotelSvc.getForHome()
+            const list = await roomSvc.getForHome()
             res.json({
                 result: list,
-                message:"Hotel Facility listed successfully",
+                message:"Room Facility listed successfully",
                 meta: null
             })
 
@@ -117,5 +117,5 @@ class HotelFacilityController{
         }
     }
 }
-const hotelfacilityCtrl = new HotelFacilityController()
-module.exports = hotelfacilityCtrl;
+const roomfacilityCtrl = new RoomFacilityController()
+module.exports = roomfacilityCtrl;
