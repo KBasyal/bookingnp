@@ -4,6 +4,7 @@ const mongoose = require("mongoose")
 const HotelFacilitySchema = new mongoose.Schema({
     facility_id: {
         type: mongoose.Schema.ObjectId,
+        ref:"Facility",
         required: true,
         min: 2
     },
@@ -11,7 +12,7 @@ const HotelFacilitySchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: "Hotel"
     },
-    isinclluded: {
+    isincluded: {
         type: Boolean,
         required: true,
         default: false

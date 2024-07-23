@@ -6,13 +6,10 @@ const PriceModifierSchema = mongoose.Schema({
         enum: ["Seasonal", "Discount", "Service Charge", "Other"],
         required: true
     },
-    value: {
+
+    percentage: {
         type: Number,
-        required: true
-    },
-    isPercentage: {
-        type: Boolean,
-        default: false
+        default:null
     },
     applicableFrom: {
         type: Date,
@@ -21,6 +18,18 @@ const PriceModifierSchema = mongoose.Schema({
     applicableTo: {
         type: Date,
         required: true
+    },
+    hotel_id:{
+        type:mongoose.Types.ObjectId,
+        ref:"Hotel",
+        default:null
+
+    },
+    room_id:{
+        type:mongoose.Types.ObjectId,
+        ref:"Room",
+        deault:null
+
     },
     createdBy: {
         type: mongoose.Types.ObjectId,

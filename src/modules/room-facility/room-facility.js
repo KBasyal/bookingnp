@@ -3,6 +3,7 @@ const mongoose = require("mongoose")
 const RoomFacliltySchema = mongoose.Schema({
     facility_id: {
         type: mongoose.Schema.ObjectId,
+        ref:'Facility',
         required: true,
         min: 2
     },
