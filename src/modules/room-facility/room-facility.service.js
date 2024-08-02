@@ -84,7 +84,7 @@ class RoomFacilityService {
         try{
             const response = await RoomFacilityModel.findOneAndDelete(filter)
             if(!response){
-                throw { code: 404, message:" RoomFacility does not exists"}
+                throw { code: 404, message:" Room Facility does not exists"}
             }
             return response
 

@@ -32,6 +32,10 @@ class RoomController{
                     title: new RegExp(req.query.search, 'i')
                 }
             }
+            if (req.query.hotel_id) {
+                filter.hotel_id = req.query.hotel_id;
+            }
+            
             const data = await roomSvc.listAll({
                 limit :limit,
                 skip:skip,
@@ -102,20 +106,33 @@ class RoomController{
             next(exception)
         }
     }
-    listForHome = async(req, res, next) =>{
-        try{
-            const list = await roomSvc.getForHome()
+        
+    getRoomsByHotel = async (req, res) => {
+        try {
+            const { hotel_id } = req.query;
+    
+            if (!hotel_id) {
+                return res.status(400).json({ message: 'Hotel ID is required' });
+            }
+    
+            const rooms = await roomSvc.getRoomsByHotel(hotel_id);
+    
+            if (!rooms) {
+                return res.status(404).json({ message: 'No rooms found for the provided hotel ID' });
+            }
             res.json({
-                result: list,
-                message:"Room listed successfully",
+                result: rooms,
+                message: "Rooms listed successfully",
                 meta: null
-            })
-
-        }catch(exception){
-            next(exception)
-
+            });
+            console.log("the selected rooms are",rooms)
+        } catch (error) {
+            console.error('Error fetching rooms:', error); // Log the error details
+            res.status(500).json({ message: 'Server error', details: error.message });
         }
     }
+    
+
 }
 const roomCtrl = new RoomController()
 module.exports = roomCtrl;

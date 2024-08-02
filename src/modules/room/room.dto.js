@@ -7,7 +7,9 @@ const RoomCreateDTO = Joi.object({
     price_per_night: Joi.number().required(),
     numberofBed: Joi.number().required(),
     isBooked: Joi.string().pattern(/^(open|booked)$/),
-    hotel_id:Joi.string().required()
+    hotel_id:Joi.string().required(),
+    // image : Joi.string().empty(null, "").optional().default(null)
+    
 
 })
 const RoomUpdateDTO = Joi.object({
@@ -15,9 +17,9 @@ const RoomUpdateDTO = Joi.object({
     price_per_night: Joi.number().required(),
     numberofBed: Joi.number().required(),
     isBooked: Joi.string().pattern(/^(open|booked)$/),
-    hotel_id:Joi.string().required()
-
-
+    hotel_id:Joi.string().required(),
+    image : Joi.string().empty(null, "").optional().default(null)
+    
 })
 module.exports={
     RoomCreateDTO,

@@ -6,7 +6,6 @@ const PriceModifierSchema = mongoose.Schema({
         enum: ["Seasonal", "Discount", "Service Charge", "Other"],
         required: true
     },
-
     percentage: {
         type: Number,
         default:null

@@ -3,51 +3,44 @@ const auth = require("../../middleware/auth.middleware");
 const allowRole = require("../../middleware/rbac.middleware");
 const { setPath, uploader } = require("../../middleware/uploader.middleware");
 const { bodyValidator } = require("../../middleware/validator.middleware");
-const roomCtrl = require("./room.controller");
-const { RoomCreateDTO, RoomUpdateDTO } = require("./room.dto");
+const bookingCtrl = require("./booking.controller");
+const { BookingCreateDTO, BookingUpdateDTO } = require("./booking.dto");
 
-router.get('/home-list', roomCtrl.getRoomsByHotel);
+router.get('/home-list', bookingCtrl.listForHome);
 
 router.route('/')
     .post(
-        auth,
+        auth, 
         allowRole('admin'),
-        setPath('rooms'),
+        setPath('bookings'),
         uploader.single('image'),
-        bodyValidator(RoomCreateDTO),
-        roomCtrl.create
+        bodyValidator(BookingCreateDTO),
+        bookingCtrl.create
     )
     .get(
         auth,
         allowRole("admin"),
-        roomCtrl.index
+        bookingCtrl.index
     )
 
 router.route('/:id')
     .get(
         auth,
         allowRole('admin'),
-        roomCtrl.show
+        bookingCtrl.show
     )
     .put(
-        auth,
+        auth, 
         allowRole('admin'),
-        setPath('rooms'),
+        setPath('bookings'),
         uploader.single('image'),
-        bodyValidator(RoomUpdateDTO),
-        roomCtrl.update
+        bodyValidator(BookingUpdateDTO, ['image']),
+        bookingCtrl.update
     )
     .delete(
         auth,
         allowRole('admin'),
-        roomCtrl.delete
-    )
-router.route('/rooms-by-hotel')
-    .get(
-        auth,
-        allowRole('admin'),
-        roomCtrl.getRoomsByHotel
-
+        bookingCtrl.delete
     )
 
 module.exports = router;

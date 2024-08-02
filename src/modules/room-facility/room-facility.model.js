@@ -1,17 +1,22 @@
 const mongoose = require("mongoose")
 
 const RoomFacliltySchema = mongoose.Schema({
+    hotel_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Hotel',
+        required: true
+    },
     facility_id: {
         type: mongoose.Schema.ObjectId,
-        ref:'Facility',
+        ref: 'Facility',
         required: true,
-        default:null
+        default: null
     },
     room_id: {
         type: mongoose.Schema.ObjectId,
         ref: "Room",
         required: true,
-        default:null
+        default: null
     },
     isinclluded: {
         type: Boolean,
@@ -21,7 +26,7 @@ const RoomFacliltySchema = mongoose.Schema({
     priceImpact: {
         type: Number, // Positive or negative impact on price
         default: 0,
-        required:true
+        required: true
     },
     createdBy: {
         type: mongoose.Types.ObjectId,

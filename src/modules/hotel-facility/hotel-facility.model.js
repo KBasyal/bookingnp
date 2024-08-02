@@ -1,21 +1,22 @@
-const { string } = require("joi")
+const { string, required } = require("joi")
 const mongoose = require("mongoose")
 
 const HotelFacilitySchema = new mongoose.Schema({
     facility_id: {
-        type: mongoose.Schema.ObjectId,
+        type: mongoose.Types.ObjectId,
         ref:"Facility",
         required: true,
         min: 2
     },
     hotel_id: {
-        type: mongoose.Schema.ObjectId,
+        type: mongoose.Types.ObjectId,
         ref: "Hotel"
     },
     isincluded: {
-        type: Boolean,
-        required: true,
-        default: false
+        type: String,
+        enum: ['included', 'not included'],
+        default: "not included",
+        required: true
     },
     priceImpact: {
         type: Number, // Positive or negative impact on price

@@ -93,19 +93,50 @@ class RoomService {
         }
     }
 
-    getForHome =async ()=>{
-        try{
-            const data = await RoomModel.find({
-                status : "active"
-            })
-            .sort({_id:"desc"})
-            .limit(10)
-            return data
+    // getForHome =async ()=>{
+    //     try{
+    //         const data = await RoomModel.find({
+    //             isBooked : "open"
+    //         })
+    //         .sort({_id:"desc"})
+    //         .limit(10)
+    //         return data
 
-        }catch(exception){
+    //     }catch(exception){
+    //         throw exception;
+    //     }
+    // }
+    getForHome = async (hotel_id) => {
+        try {
+            // Build the query object
+            let query = { isBooked: "open" };
+            if (hotel_id) {
+                query.hotel_id = hotel_id;
+            }
+    
+            // Fetch rooms from the database
+            const data = await RoomModel.find(query)
+                .sort({ _id: "desc" })
+                .limit(10);
+    
+            return data;
+        } catch (exception) {
+            throw exception;
+        }
+    };
+    
+    getRoomsByHotel = async (hotel_id) => {
+        try {
+            const response = await RoomModel.find({ hotel_id });
+            if(!response){
+                throw { code: 404, message:" Room does not exists"}
+            }
+            return response
+        } catch (exception) {
             throw exception;
         }
     }
+    
 }
 const roomSvc = new RoomService()
 module.exports = roomSvc;
