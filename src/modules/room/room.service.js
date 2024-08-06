@@ -93,19 +93,6 @@ class RoomService {
         }
     }
 
-    // getForHome =async ()=>{
-    //     try{
-    //         const data = await RoomModel.find({
-    //             isBooked : "open"
-    //         })
-    //         .sort({_id:"desc"})
-    //         .limit(10)
-    //         return data
-
-    //     }catch(exception){
-    //         throw exception;
-    //     }
-    // }
     getForHome = async (hotel_id) => {
         try {
             // Build the query object

@@ -7,7 +7,6 @@ const hotelCtrl = require("./hotel.controller");
 const { HotelCreateDTO, HotelUpdateDTO } = require("./hotel.dto");
 
 router.get('/home-list', hotelCtrl.listForHome);
-
 router.route('/')
     .post(
         auth, 

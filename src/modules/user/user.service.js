@@ -10,7 +10,6 @@ class UserService {
             throw exception;
         }
     }
-
     listAll = async ({ limit, skip, filter = {} }) => {
         try {
             const response = await UserModel.find(filter)

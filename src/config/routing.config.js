@@ -13,6 +13,7 @@ const roomRouter = require("../modules/room/room.router")
 const hotelfacilityRouter = require("../modules/hotel-facility/hotel-facility.router")
 const roomfacilityRouter = require ("../modules/room-facility/room-facility.router.js")
 const bookingRouter = require("../modules/booking/booking.router.js")
+const aboutRouter = require("../modules/about/about.router.js")
 
 
 
@@ -28,6 +29,7 @@ mainRoute.use('/room', roomRouter)
 mainRoute.use('/hotel-facility', hotelfacilityRouter)
 mainRoute.use('/room-facility', roomfacilityRouter)
 mainRoute.use('/booking', bookingRouter)
+mainRoute.use('/about',aboutRouter)
 
 
 

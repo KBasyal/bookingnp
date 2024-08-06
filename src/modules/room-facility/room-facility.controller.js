@@ -32,6 +32,9 @@ class RoomFacilityController {
                     title: new RegExp(req.query.search, 'i')
                 }
             }
+            if (req.query.room_id) {
+                filter.room_id = req.query.room_id;
+            }
             const data = await roomSvc.listAll({
                 limit: limit,
                 skip: skip,
