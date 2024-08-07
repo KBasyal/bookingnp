@@ -6,7 +6,7 @@ const { bodyValidator } = require("../../middleware/validator.middleware");
 const aboutCtrl = require("./about.controller");
 const { AboutCreateDTO, AboutUpdateDTO } = require("./about.dto");
 
-router.get('/home-list', aboutCtrl.listForHome);
+router.get('/', aboutCtrl.listForHome);
 
 router.route('/')
     .post(

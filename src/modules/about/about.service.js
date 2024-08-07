@@ -92,7 +92,6 @@ class AboutService {
     getForHome =async ()=>{
         try{
             const data = await AboutModel.find({
-                status : "active"
             })
             .sort({_id:"desc"})
             .limit(10)
