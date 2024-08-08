@@ -13,5 +13,9 @@ authRoute.get("/activate/:token", authCtrl.activate)
 authRoute.post('/login',bodyValidator(loginDTO), authCtrl.login)
 authRoute.get('/me', auth, authCtrl.getLoggedIn)
 authRoute.get("/admin", auth, allowRole('admin'), authCtrl.adminAccess)
+authRoute.post('/logout', (req, res) => {
+    // This route could have some server-side logic if needed, e.g., invalidating sessions
+    res.status(200).json({ message: 'Logged out successfully' });
+});
 
 module.exports = authRoute;

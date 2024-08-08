@@ -7,6 +7,10 @@ const hotelCtrl = require("./hotel.controller");
 const { HotelCreateDTO, HotelUpdateDTO } = require("./hotel.dto");
 
 router.get('/home-list', hotelCtrl.listForHome);
+// router.get('/type', hotelCtrl.getHotelsByType);
+// router.get('/type', hotelCtrl.getHotelsByType);
+router.get('/type', hotelCtrl.getHotelTypes);
+router.get('/type/:type', hotelCtrl.getHotelsByType); 
 router.route('/')
     .post(
         auth, 
@@ -18,14 +22,14 @@ router.route('/')
     )
     .get(
         auth,
-        allowRole("admin"),
+        allowRole(['admin', 'staff', 'customer']),
         hotelCtrl.index
     )
 
 router.route('/:id')
     .get(
         auth,
-        allowRole('admin'),
+        allowRole(['admin', 'staff', 'customer']),
         hotelCtrl.show
     )
     .put(

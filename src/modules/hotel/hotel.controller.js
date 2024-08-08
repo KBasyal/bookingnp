@@ -116,6 +116,32 @@ class HotelController {
 
         }
     }
+    getHotelTypes = async (req, res, next) => {
+        try {
+            const types = await hotelSvc.getAllTypes(); // Implement this in your service
+            res.json({
+                result: types,
+                message: "Hotel types fetched successfully",
+            });
+        } catch (exception) {
+            next(exception);
+        }
+    };
+    getHotelsByType = async (req, res, next) => {
+        try {
+            const { type } = req.params;
+            const decodedType = decodeURIComponent(type); // Decode the type parameter
+            const hotels = await hotelSvc.getHotelsByType(decodedType); // Use decoded type
+            res.json({
+                result: hotels,
+                message: `Hotels of type ${decodedType} fetched successfully`,
+            });
+        } catch (exception) {
+            next(exception);
+        }
+    };
+    
+
 }
 const hotelCtrl = new HotelController()
 module.exports = hotelCtrl;

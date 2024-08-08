@@ -102,6 +102,15 @@ class HotelService {
             throw exception;
         }
     }
+    getAllTypes = async () => {
+        const types = await HotelModel.distinct('type'); // This will get all unique types from the hotel collection
+        return types;
+    };
+    getHotelsByType = async (type) => {
+        const hotels = await HotelModel.find({ type: type });
+        return hotels;
+    };
+
 }
 const hotelSvc = new HotelService()
 module.exports = hotelSvc;

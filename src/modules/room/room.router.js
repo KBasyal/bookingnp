@@ -19,19 +19,19 @@ router.route('/')
     )
     .get(
         auth,
-        allowRole("admin"),
+        allowRole(['admin', 'staff', 'customer']),
         roomCtrl.index
     )
 
 router.route('/:id')
     .get(
         auth,
-        allowRole('admin'),
+        allowRole(['admin', 'staff', 'customer']),
         roomCtrl.show
     )
     .put(
         auth,
-        allowRole('admin'),
+        allowRole(['admin', 'staff', 'customer']),
         setPath('rooms'),
         uploader.single('image'),
         bodyValidator(RoomUpdateDTO),
@@ -45,7 +45,7 @@ router.route('/:id')
 router.route('/rooms-by-hotel')
     .get(
         auth,
-        allowRole('admin'),
+        allowRole(['admin', 'staff', 'customer']),
         roomCtrl.getRoomsByHotel
 
     )

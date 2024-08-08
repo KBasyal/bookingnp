@@ -90,12 +90,6 @@ class AuthController{
             next(exception)
         }
         
-        // to do : data validation
-        // to do : db query execute
-        // to do :otp create
-        // to do jwt token generate
-        // to do : clinet response
-
     }
     activate = async(req, res, next)=>{
         try{

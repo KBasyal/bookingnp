@@ -19,14 +19,14 @@ router.route('/')
     )
     .get(
         auth,
-        allowRole("admin"),
+        allowRole(['admin', 'staff', 'customer']),
         roomfacilityCtrl.index
     )
 
 router.route('/:id')
     .get(
         auth,
-        allowRole('admin'),
+        allowRole(['admin', 'staff', 'customer']),
         roomfacilityCtrl.show
     )
     .put(
